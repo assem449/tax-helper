@@ -1,8 +1,19 @@
 import { useState, useRef, useCallback } from 'react'
 import { buildSystemPrompt, buildUserMessage } from './taxData.js'
 
-const API_URL = 'https://api.anthropic.com/v1/messages'
-const MODEL = 'claude-sonnet-4-20250514'
+const API_URL = 'https://api.openai.com/v1/chat/completions'
+const MODEL = 'gpt-4.1-mini'
+
+function extractTextDelta(delta) {
+  if (typeof delta === 'string') return delta
+  if (Array.isArray(delta)) {
+    return delta
+      .filter(part => part?.type === 'text' && typeof part.text === 'string')
+      .map(part => part.text)
+      .join('')
+  }
+  return ''
+}
 
 export function useAIAssistant(apiKey) {
   const [messages, setMessages] = useState([])
@@ -16,7 +27,7 @@ export function useAIAssistant(apiKey) {
 
   const streamFromAPI = useCallback(async (userContent) => {
     if (!apiKey) {
-      appendMessage('error', 'No API key set. Enter your Anthropic API key in the settings panel above.')
+      appendMessage('error', 'No API key set. Enter your OpenAI API key in the settings panel above.')
       return
     }
 
@@ -28,23 +39,22 @@ export function useAIAssistant(apiKey) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           model: MODEL,
           max_tokens: 1000,
-          system: buildSystemPrompt(),
-          messages: historyRef.current,
+          messages: [
+            { role: 'system', content: buildSystemPrompt() },
+            ...historyRef.current,
+          ],
           stream: true,
         }),
       })
 
       if (!res.ok) {
-        const err = await res.json()
+        const err = await res.json().catch(() => null)
         appendMessage('error', `API error: ${err.error?.message || res.status}`)
-        setLoading(false)
         return
       }
 
@@ -65,8 +75,9 @@ export function useAIAssistant(apiKey) {
           if (data === '[DONE]') break
           try {
             const parsed = JSON.parse(data)
-            if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
-              fullText += parsed.delta.text
+            const deltaText = extractTextDelta(parsed.choices?.[0]?.delta?.content)
+            if (deltaText) {
+              fullText += deltaText
               setMessages(prev =>
                 prev.map(m => m.id === msgId ? { ...m, text: fullText } : m)
               )
@@ -82,9 +93,9 @@ export function useAIAssistant(apiKey) {
 
     } catch (e) {
       appendMessage('error', 'Network error — check your connection or API key.')
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
   }, [apiKey])
 
   const onFieldFocus = useCallback((field, formValues) => {

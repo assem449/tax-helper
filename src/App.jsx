@@ -58,7 +58,7 @@ export default function App() {
               <input
                 className={styles.keyInput}
                 type="password"
-                placeholder="Paste Anthropic API key..."
+                placeholder="Paste OpenAI API key..."
                 value={apiKeyInput}
                 onChange={e => setApiKeyInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && saveKey()}
