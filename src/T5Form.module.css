@@ -1,0 +1,120 @@
+.form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.slipHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.slipName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.slipYear {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+.slipBadge {
+  font-size: 11px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 0.5px solid var(--accent-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 0.5px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.fieldWrap.active {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.fieldMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.boxTag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.3;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+}
+
+.fieldWrap.active .inputWrap {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0,87,184,0.1);
+}
+
+.dollar {
+  padding: 0 6px 0 9px;
+  font-size: 13px;
+  color: var(--text3);
+  user-select: none;
+}
+
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--text);
+  padding: 7px 9px 7px 0;
+  width: 100%;
+  font-family: var(--font);
+}
+
+.formNote {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 0.5px solid var(--border2);
+}

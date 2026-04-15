@@ -1,0 +1,138 @@
+.shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+  background: #000;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.topBarText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sub {
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.keyRow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.keyInput {
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  width: 240px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+.keyInput:focus {
+  border-color: var(--accent);
+}
+
+.saveKeyBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.saveKeyBtn:hover {
+  background: #004fa5;
+}
+
+.keyBtn {
+  font-size: 11px;
+  color: var(--text3);
+  background: none;
+  border: 0.5px solid var(--border);
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+
+.keyBtn:hover {
+  color: var(--text2);
+  background: var(--surface2);
+}
+
+.demoTag {
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--surface2);
+  border: 0.5px solid var(--border2);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  margin: 12px;
+  border: 0.5px solid var(--border);
+  overflow: hidden;
+}
+
+.formSide {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.sectionLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 20px 0;
+}
