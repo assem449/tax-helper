@@ -27,7 +27,7 @@ export function useAIAssistant(apiKey) {
 
   const streamFromAPI = useCallback(async (userContent) => {
     if (!apiKey) {
-      appendMessage('error', 'No API key set. Enter your OpenAI API key in the settings panel above.')
+      appendMessage('error', 'No API key set. Add VITE_OPENAI_API_KEY to your .env file and restart the dev server.')
       return
     }
 

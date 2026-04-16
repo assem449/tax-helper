@@ -53,55 +53,6 @@
   margin-left: auto;
 }
 
-.keyRow {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.keyInput {
-  border: 0.5px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 12px;
-  width: 240px;
-  background: var(--surface);
-  color: var(--text);
-  outline: none;
-}
-
-.keyInput:focus {
-  border-color: var(--accent);
-}
-
-.saveKeyBtn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.saveKeyBtn:hover {
-  background: #004fa5;
-}
-
-.keyBtn {
-  font-size: 11px;
-  color: var(--text3);
-  background: none;
-  border: 0.5px solid var(--border);
-  border-radius: 5px;
-  padding: 4px 10px;
-}
-
-.keyBtn:hover {
-  color: var(--text2);
-  background: var(--surface2);
-}
-
 .demoTag {
   font-size: 10px;
   color: var(--text3);

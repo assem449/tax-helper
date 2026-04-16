@@ -6,9 +6,7 @@ import { DEFAULT_VALUES } from './taxData.js'
 import styles from './App.module.css'
 
 export default function App() {
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem('ws_api_key') || '')
-  const [apiKeyInput, setApiKeyInput] = useState('')
-  const [showKeyInput, setShowKeyInput] = useState(!localStorage.getItem('ws_api_key'))
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY?.trim() || ''
   const [formValues, setFormValues] = useState(DEFAULT_VALUES)
 
   const { messages, loading, activeField, onFieldFocus, sendFollowUp } = useAIAssistant(apiKey)
@@ -25,21 +23,6 @@ export default function App() {
     setFormValues(prev => ({ ...prev, [id]: val }))
   }
 
-  const saveKey = () => {
-    const key = apiKeyInput.trim()
-    if (!key) return
-    localStorage.setItem('ws_api_key', key)
-    setApiKey(key)
-    setApiKeyInput('')
-    setShowKeyInput(false)
-  }
-
-  const clearKey = () => {
-    localStorage.removeItem('ws_api_key')
-    setApiKey('')
-    setShowKeyInput(true)
-  }
-
   return (
     <div className={styles.shell}>
       <div className={styles.topBar}>
@@ -49,23 +32,6 @@ export default function App() {
           <span className={styles.sub}>2024 return · T5 slip entry</span>
         </div>
         <div className={styles.topBarRight}>
-          {apiKey && !showKeyInput ? (
-            <button className={styles.keyBtn} onClick={clearKey}>
-              Change API key
-            </button>
-          ) : (
-            <div className={styles.keyRow}>
-              <input
-                className={styles.keyInput}
-                type="password"
-                placeholder="Paste OpenAI API key..."
-                value={apiKeyInput}
-                onChange={e => setApiKeyInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && saveKey()}
-              />
-              <button className={styles.saveKeyBtn} onClick={saveKey}>Save</button>
-            </div>
-          )}
           <span className={styles.demoTag}>Concept demo</span>
         </div>
       </div>
